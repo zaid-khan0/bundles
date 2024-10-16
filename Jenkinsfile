@@ -18,6 +18,7 @@ pipeline {
             steps {
                 // Directly import notebooks to the full path without looping
                 sh """
+                #!/bin/bash
                 ${PATH}databricks workspace import_dir \
                 --overwrite notebooks /Workspace/Users/awsdatabricks00@gmail.com/jenkinsAG \
                 --host ${DATABRICKS_HOST} \
