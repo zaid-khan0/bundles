@@ -19,7 +19,6 @@ pipeline {
             steps {
                 // Directly import notebooks to the full path without looping
                 sh """
-                #!/bin/bash
                 ${PATH}/databricks clusters list
                 """
             }
