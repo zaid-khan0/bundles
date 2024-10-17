@@ -20,7 +20,7 @@ pipeline {
                 // Directly import notebooks to the full path without looping
                 sh """
                 #!/bin/bash
-                ${PATH}/databricks workspace import_dir /notebooks/ /Workspace/Users/awsdatabricks00@gmail.com/jenkinsAG
+                ${PATH}/databricks clusters list
                 """
             }
         }
