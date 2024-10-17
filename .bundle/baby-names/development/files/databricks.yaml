@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+bundle:
+  name: baby-names
+
+resources:
+  jobs:
+    retrieve-filter-baby-names-job:
+      name: retrieve-filter-baby-names-job
+      job_clusters:
+        - job_cluster_key: common-cluster
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            node_type_id: Standard_F4
+            num_workers: 1
+      tasks:
+        - task_key: retrieve-baby-names-task
+          job_cluster_key: common-cluster
+          notebook_task:
+            notebook_path: /Workspace/Users/awsdatabricks00@gmail.com/.bundle/baby-names/development/files/retrieve-baby-names.py
+        - task_key: filter-baby-names-task
+          depends_on:
+            - task_key: retrieve-baby-names-task
+          job_cluster_key: common-cluster
+          notebook_task:
+            notebook_path: /Workspace/Users/awsdatabricks00@gmail.com/.bundle/baby-names/development/files/filter-baby-names.py
+
+targets:
+  development:
+    workspace:
+      host: https://adb-3576606825139482.2.azuredatabricks.net/

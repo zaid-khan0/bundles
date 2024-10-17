@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "config": {
+    "bundle": {
+      "git": {
+        "branch": "main",
+        "bundle_root_path": "."
+      }
+    },
+    "workspace": {
+      "file_path": "/Workspace/Users/awsdatabricks00@gmail.com/.bundle/baby-names/development/files"
+    },
+    "resources": {
+      "jobs": {
+        "retrieve-filter-baby-names-job": {
+          "id": "533708710801009",
+          "relative_path": "databricks.yaml"
+        }
+      }
+    }
+  }
+}
