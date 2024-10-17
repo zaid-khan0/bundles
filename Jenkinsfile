@@ -3,7 +3,7 @@ node {
   def GITBRANCH     = "main"
   def DBCLIPATH     = "/home/linuxbrew/.linuxbrew/bin"
   def BUNDLE_ROOT = ".bundle/baby-names/development/files"
-  def BUNDLETARGET  = "development"
+  def BUNDLETARGET  = "UAT"
 
   stage('Checkout') {
     git branch: GITBRANCH, url: GITREPOREMOTE

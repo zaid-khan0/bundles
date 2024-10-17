@@ -25,6 +25,6 @@ resources:
             notebook_path: /Workspace/Repos/awsdatabricks00@gmail.com/bundles/DAB/filter-baby-names.py
 
 targets:
-  development:
+  UAT:
     workspace:
       host: https://adb-3576606825139482.2.azuredatabricks.net/
