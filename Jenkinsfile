@@ -1,5 +1,5 @@
 node {
-    def DBCLIPATH = '/home/linuxbrew/.linuxbrew/bin'
+  def DBCLIPATH = '/home/linuxbrew/.linuxbrew/bin'
   
   stages {
         stage('Checkout') {
