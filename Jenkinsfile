@@ -20,9 +20,7 @@ pipeline {
                 sh """
                 #!/bin/bash
                 ${PATH}databricks workspace import_dir \
-                --overwrite notebooks /Workspace/Users/awsdatabricks00@gmail.com/jenkinsAG \
-                --host ${DATABRICKS_HOST} \
-                --token ${DATABRICKS_SECRET}
+                /notebooks/ /Workspace/Users/awsdatabricks00@gmail.com/jenkinsAG \
                 """
             }
         }
