@@ -4,7 +4,7 @@ node {
 
   stage('List Clusters') {
     sh """#!/bin/bash
-          ${DBCLIPATH}databricks clusters list -p newprofile
+          ${DBCLIPATH}/databricks clusters list -p newprofile
        """
   }
 }
