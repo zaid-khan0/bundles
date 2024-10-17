@@ -16,13 +16,13 @@ resources:
         - task_key: retrieve-baby-names-task
           job_cluster_key: common-cluster
           notebook_task:
-            notebook_path: /Workspace/Users/awsdatabricks00@gmail.com/.bundle/baby-names/development/files/retrieve-baby-names.py
+            notebook_path: /Workspace/Repos/awsdatabricks00@gmail.com/bundles/DAB/retrieve-baby-names.py
         - task_key: filter-baby-names-task
           depends_on:
             - task_key: retrieve-baby-names-task
           job_cluster_key: common-cluster
           notebook_task:
-            notebook_path: /Workspace/Users/awsdatabricks00@gmail.com/.bundle/baby-names/development/files/filter-baby-names.py
+            notebook_path: /Workspace/Repos/awsdatabricks00@gmail.com/bundles/DAB/filter-baby-names.py
 
 targets:
   development:
