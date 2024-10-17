@@ -10,12 +10,12 @@ node {
   }
   stage('Validate Bundle') {
     sh """#!/bin/bash
-          ${DBCLIPATH}/databricks bundle validate -t ${BUNDLETARGET} --bundle-root ${BUNDLE_ROOT}
+          ${DBCLIPATH}/databricks bundle validate -t 
        """
   }
   stage('Deploy Bundle') {
     sh """#!/bin/bash
-          ${DBCLIPATH}/databricks bundle deploy -t ${BUNDLETARGET} --bundle-root ${BUNDLE_ROOT}
+          ${DBCLIPATH}/databricks bundle deploy -t
        """
   }
 }
