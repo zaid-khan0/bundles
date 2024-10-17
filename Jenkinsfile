@@ -2,7 +2,7 @@ node {
   def GITREPOREMOTE = "https://github.com/zaid-khan0/bundles.git"
   def GITBRANCH     = "main"
   def DBCLIPATH     = "/home/linuxbrew/.linuxbrew/bin"
-  def BUNDLE_ROOT = ".bundle/baby-names/development/files/databricks.yml"
+  def BUNDLE_ROOT = ".bundle/baby-names/development/files"
   def BUNDLETARGET  = "dev"
 
   stage('Checkout') {
