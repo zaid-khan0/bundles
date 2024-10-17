@@ -3,9 +3,10 @@ pipeline {
     environment {
         // Correctly define environment variables
         DATABRICKS_HOST = 'https://adb-3576606825139482.2.azuredatabricks.net/'
-        DATABRICKS_CLIENT_ID = 'f9518eb9c4894d8387914ec4a015e25f5a99dc731f760df8bff1f130183f225a'
-        DATABRICKS_SECRET = 'dose16691054ba5ed40df5dbe4a09f14a54a'  // Replace this with Jenkins credentials in production
+        DATABRICKS_CLIENT_ID = '32da3bf3-ec3a-4d27-94b5-01ee4beeb715'
+        DATABRICKS_SECRET = 'dose440e8e14fe299c9028a1cd4067fdb88a'  // Replace this with Jenkins credentials in production
         PATH='/home/linuxbrew/.linuxbrew/bin/databricks'
+
     }
     stages {
         stage('Checkout') {
