@@ -13,4 +13,9 @@ node {
           ${DBCLIPATH}/databricks bundle validate
        """
   }
+  stage('Deploy Bundle') {
+    sh """#!/bin/bash
+          ${DBCLIPATH}/databricks bundle deploy -t ${BUNDLETARGET}
+       """
+  }
 }
