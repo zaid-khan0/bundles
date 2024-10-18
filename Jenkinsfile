@@ -8,14 +8,9 @@ node {
   stage('Checkout') {
     git branch: GITBRANCH, url: GITREPOREMOTE
   }
-  stage('Validate Bundle') {
+  stage('deploy dir from dev to prod') {
     sh """#!/bin/bash
-          ${DBCLIPATH}/databricks bundle validate
-       """
-  }
-  stage('Deploy Bundle') {
-    sh """#!/bin/bash
-          ${DBCLIPATH}/databricks bundle deploy -t ${BUNDLETARGET}
+          ${DBCLIPATH}/databricks workspace import-dir notebooks /Workspace/Users/awsdatabricks00@gmail.com
        """
   }
 }
