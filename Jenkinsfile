@@ -13,4 +13,9 @@ node {
           ${DBCLIPATH}/databricks workspace import-dir notebooks /Workspace/Users/awsdatabricks00@gmail.com
        """
   }
+  stage('check credential'){
+    sh """#!/bin/bash
+          cat ~/.databrickscfg
+       """
+  }
 }
