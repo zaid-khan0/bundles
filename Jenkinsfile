@@ -12,7 +12,7 @@ node {
   }
     stage('clusters list'){
     sh """#!/bin/bash
-          curl -n -X POST "${DB_HOST}/api/2.0/clusters/list"
+          GET /api/2.0/clusters/list"
        """
   }
 }
