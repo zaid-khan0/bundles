@@ -16,9 +16,9 @@ node {
        """
   }
 
-  stage('clusters list') {
+  stage('deploy dir from dev to prod') {
     sh """#!/bin/bash
-          echo ${DBCLIPATH}/databricks clusters list
+          ${DBCLIPATH}/databricks workspace import-dir notebooks /Workspace/Users/awsdatabricks00@gmail.com/new
        """
   }
 }
