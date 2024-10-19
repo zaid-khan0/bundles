@@ -12,7 +12,7 @@ node {
   }
     stage('clusters list'){
     sh """#!/bin/bash
-          GET /api/2.0/clusters/list
+          curl -n -X GET /api/2.0/clusters/list
        """
   }
 }
