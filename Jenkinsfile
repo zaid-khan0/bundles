@@ -12,7 +12,7 @@ node {
   }
     stage('clusters list'){
     sh """#!/bin/bash
-          response=(curl -n -X GET "${DATABRICKS_HOST}/api/2.0/clusters/list")
+          response=\$(curl -n -X GET "${DATABRICKS_HOST}/api/2.0/clusters/list")
 
           echo "Raw API response:"
           echo "\$response"
