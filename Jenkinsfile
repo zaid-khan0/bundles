@@ -13,8 +13,10 @@ node {
     stage('clusters list'){
     sh """#!/bin/bash
           response=(curl -n -X GET "${DATABRICKS_HOST}/api/2.0/clusters/list")
-          echo "clusters in workspace:"
-          echo "\$response" | jq '.clusters[] | {cluster_name, cluster_id}'
+
+          echo "Raw API response:"
+          echo "\$response"
+
        """
   }
 }
