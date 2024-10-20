@@ -10,10 +10,21 @@ node {
   stage('Checkout') {
     git branch: GITBRANCH, url: GITREPOREMOTE
   }
-  stage('cluster list') {
+  stage('import dir') {
     withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
       sh """#!/bin/bash
-            ${DB_CLI}/databricks clusters list
+            curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
+                -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "path": "${DEV_DIR}",
+                  "format": "SOURCE",
+                  "language": "PYTHON",
+                  "overwrite": true,
+                  "content": "'\$(base64 -w 0 "\$notebook")'"
+                }'
+            done
+         """
          """
     }
   }
