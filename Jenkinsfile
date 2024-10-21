@@ -11,11 +11,9 @@ node {
     git branch: GITBRANCH, url: GITREPOREMOTE
   }
   stage('import dir') {
-    withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
       sh """#!/bin/bash
             export DATABRICKS_HOST=${DATABRICKS_HOST}
             ${DB_CLI}/databricks/clusters/list           
          """
-    }
   }
 }
