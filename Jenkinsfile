@@ -19,8 +19,10 @@ node {
                 -d '{
                   "path": "${DEV_DIR}",
                   "format": "AUTO",
-                  "content": base64.standard_b64encode(${PATH}.encode('utf-8')).decode('utf-8')
+                  "content": "${base64.standard_b64encode(${PATH}.encode('utf-8')).decode('utf-8')}"
                 }'
+
+            
          """
     }
   }
