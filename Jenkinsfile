@@ -19,6 +19,7 @@ node {
                 -d '{
                   "path": "${DEV_DIR}",
                   "format": "AUTO",
+                  "overwrite" : true,
                   "content": "'\$(base64 -w 0 < ${PATH})'"
                 }'
 
