@@ -13,18 +13,16 @@ node {
   stage('import dir') {
     withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
       sh """#!/bin/bash
-            curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
+            curl -X POST "${DATABRICKS_HOST}/api/2.1/workspace/import" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
                 -H "Content-Type: application/json" \
                 -d '{
-                  "path": "${DEV_DIR}",
+                  "path": "/var/lib/jenkins/workspace/gitIntegration/notebooks",
                   "format": "SOURCE",
                   "language": "PYTHON",
-                  "overwrite": true,
-                  "content": "'\$(base64 -w 0 "\$notebook")'"
+                  "overwrite": true
                 }'
             done
-         """
          """
     }
   }
