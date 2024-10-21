@@ -5,7 +5,7 @@ node {
   stage('import dir') {
       sh """#!/bin/bash
             export DATABRICKS_HOST=${DATABRICKS_HOST}
-            ${DB_CLI}/databricks/clusters/list           
+            ${DB_CLI}/databricks clusters list           
          """
   }
 }
