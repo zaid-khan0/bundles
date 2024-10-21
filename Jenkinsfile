@@ -20,6 +20,7 @@ node {
                   "path": "${DEV_DIR}",
                   "format": "DBC"
                 }'
+            >> result.json
 
             
          """
