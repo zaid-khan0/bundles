@@ -1,11 +1,25 @@
-node {
-  def DATABRICKS_HOST = "https://adb-3242958281839281.1.azuredatabricks.net"
+  def DATABRICKS_HOST = "https://adb-3576606825139482.2.azuredatabricks.net/"
   def DB_CLI= "/home/linuxbrew/.linuxbrew/bin"
+  def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/notebooks"
+  def BUNDLETARGET  = "UAT"
+  def PATH = "/var/lib/jenkins/workspace/gitIntegration/myfolder"
 
+  stage('Checkout') {
+    git branch: GITBRANCH, url: GITREPOREMOTE
+  }
   stage('import dir') {
+    withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
       sh """#!/bin/bash
-            export DATABRICKS_HOST=${DATABRICKS_HOST}
-            ${DB_CLI}/databricks clusters list           
+            curl -n -X GET "${DATABRICKS_HOST}/api/2.0/workspace/export" \
+                -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "path": "${DEV_DIR}",
+                  "format": "DBC"
+                }'
+
+            
          """
+    }
   }
 }
