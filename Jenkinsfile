@@ -17,7 +17,7 @@ node {
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
                 -H "Content-Type: application/json" \
                 -d '{
-                  "path": "/var/lib/jenkins/workspace/gitIntegration/notebooks",
+                  "path": "${DEV_DIR}",
                   "format": "SOURCE",
                   "language": "PYTHON",
                   "overwrite": true
