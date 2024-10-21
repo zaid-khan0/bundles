@@ -22,7 +22,6 @@ node {
                   "language": "PYTHON",
                   "overwrite": true
                 }'
-            done
          """
     }
   }
