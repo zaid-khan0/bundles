@@ -3,7 +3,7 @@ node {
   def GITBRANCH     = "main"
   def DATABRICKS_HOST = "https://adb-3242958281839281.1.azuredatabricks.net"
   def DB_CLI= "/home/linuxbrew/.linuxbrew/bin"
-  def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/abcd"
+  def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/fol"
   def BUNDLETARGET  = "UAT"
   def SOURCE = "/notebooks"
 
@@ -18,7 +18,8 @@ node {
                 -H "Content-Type: application/json" \
                 -d '{
                   "path": "${DEV_DIR}",
-                  "format": "AUTO"
+                  "format": "AUTO",
+                  "content": "${SOURCE}"
                 }'
          """
     }
