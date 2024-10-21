@@ -5,7 +5,7 @@ node {
   def DB_CLI= "/home/linuxbrew/.linuxbrew/bin"
   def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/notebooks"
   def BUNDLETARGET  = "UAT"
-  def PATH = "/var/lib/jenkins/workspace/gitIntegration/myfolder"
+  def PATH = "/var/lib/jenkins/workspace/gitIntegration"
 
   stage('Checkout') {
     git branch: GITBRANCH, url: GITREPOREMOTE
@@ -19,8 +19,8 @@ node {
                 -d '{
                   "path": "${DEV_DIR}",
                   "format": "DBC"
-                }'
-            >> result.json
+                }'-O ${PATH}
+            >> /home/awsdatabricks00/result.json
 
             
          """
