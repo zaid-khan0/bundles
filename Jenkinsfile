@@ -18,8 +18,7 @@ node {
                 -H "Content-Type: application/json" \
                 -d '{
                   "path": "${DEV_DIR}",
-                  "format": "SOURCE",
-                  "overwrite": true
+                  "format": "AUTO"
                 }'
          """
     }
