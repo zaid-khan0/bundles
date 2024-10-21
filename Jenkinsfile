@@ -19,7 +19,6 @@ node {
                 -d '{
                   "path": "${DEV_DIR}",
                   "format": "DBC",
-                  "overwrite" : true,
                   "content": "${PATH}"
                 }'
 
