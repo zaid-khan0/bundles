@@ -5,7 +5,7 @@ node {
   def DB_CLI= "/home/linuxbrew/.linuxbrew/bin"
   def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/fol"
   def BUNDLETARGET  = "UAT"
-  def SOURCE = "/notebooks"
+  def PATH = "/var/lib/jenkins/workspace/gitIntegration/notebooks"
 
   stage('Checkout') {
     git branch: GITBRANCH, url: GITREPOREMOTE
@@ -19,7 +19,7 @@ node {
                 -d '{
                   "path": "${DEV_DIR}",
                   "format": "AUTO",
-                  "content": "${SOURCE}"
+                  "content": base64.standard_b64encode(${PATH}.encode('utf-8')).decode('utf-8')
                 }'
          """
     }
