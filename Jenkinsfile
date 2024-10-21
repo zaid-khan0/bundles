@@ -3,7 +3,7 @@ node {
   def GITBRANCH     = "main"
   def DATABRICKS_HOST = "https://adb-3242958281839281.1.azuredatabricks.net"
   def DB_CLI= "/home/linuxbrew/.linuxbrew/bin"
-  def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com"
+  def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/abcd"
   def BUNDLETARGET  = "UAT"
   def SOURCE = "/notebooks"
 
