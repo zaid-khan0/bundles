@@ -32,18 +32,20 @@ node {
         echo "idhr aaya?, $DB_NOTEBOOK_CONTENT"
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
             // Import the DBC file to the production workspace
+        node{
             sh """#!/bin/bash
             curl -X POST "${DATABRICKS_HOST_PROD}/api/2.0/workspace/import" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
                 -H "Content-Type: application/json" \
                 -d '{
-                  "path": "/Workspace",
+                  "path": "/Workspace/Users/awsdatabricks00@gmail.com/nyafolder",
                   "format": "DBC",
-                  "content": "${DB_NOTEBOOK_CONTENT}"
+                  "content": ${DB_NOTEBOOK_CONTENT}
                 }'
 
             
          """
         }
     }
+}
 }
