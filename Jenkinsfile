@@ -10,25 +10,23 @@ node {
         git branch: GITBRANCH, url: GITREPOREMOTE
     }
 
-    stage('export notebooks from dev') {
-        withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-            script {
-                // Export the notebooks and save to a local DBC file
-                sh """
-                curl -s -X GET "${DATABRICKS_HOST_DEV}/api/2.0/workspace/export" \
-                    -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
-                    -H "Content-Type: application/json" \
-                    -d '{
-                        "path": "${DEV_DIR}",
-                        "format": "DBC"
-                    }' -o ${LOCAL_DBC_FILE}
-                """
-                
-                // Check if the file was exported successfully
-                sh "cat ${LOCAL_DBC_FILE}"
+    stage('Export Notebooks') {
+      withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
+        node {
+                script {
+                    // Capture the output of the curl command
+                    def output = sh(script: """
+                       curl -X GET "https://adb-3576606825139482.2.azuredatabricks.net/api/2.0/workspace/export"\\
+                             -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \\
+                             -d '{"path": "/Workspace/Users/awsdatabricks00@gmail.com/notebooks","format": "DBC"}' | jq '.content'
+                    """, returnStdout: true).trim()
+                    // Store the output in a Jenkins environment variable
+                    env.DB_NOTEBOOK_CONTENT = output
+                    echo "Exported notebook content stored in DB_NOTEBOOK_CONTENT environment variable, $DB_NOTEBOOK_CONTENT"
+                }
             }
-        }
     }
+  }
 
     stage('import notebooks to prod') {
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
