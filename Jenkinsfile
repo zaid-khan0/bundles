@@ -23,16 +23,10 @@ node {
                     // Store the output in a Jenkins environment variable
                     env.DB_NOTEBOOK_CONTENT = output
                     echo "Exported notebook content stored in DB_NOTEBOOK_CONTENT environment variable, $DB_NOTEBOOK_CONTENT"
-                }
+                
             }
-    }
-  }
 
-    stage('import notebooks to prod') {
-        echo "idhr aaya?, $DB_NOTEBOOK_CONTENT"
-        withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
-            // Import the DBC file to the production workspace
-        node{
+        {
             sh """#!/bin/bash
             curl -X POST "${DATABRICKS_HOST_PROD}/api/2.0/workspace/import" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
@@ -46,6 +40,7 @@ node {
             
          """
         }
+      }
     }
 }
 }
