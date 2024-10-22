@@ -27,7 +27,7 @@ node {
                     returnStdout: true
                 ).trim()
                 env.EXPORTED_CONTENT = response
-                echo "$EXPORTED_CONTENT"
+                echo "$response"
             }
         }
     }
