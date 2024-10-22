@@ -27,11 +27,13 @@ node {
                     returnStdout: true
                 ).trim()
                 env.EXPORTED_CONTENT = response
+                echo "$EXPORTED_CONTENT"
             }
         }
     }
     
     stage('import notebooks to prod') {
+        echo "$EXPORTED_CONTENT"
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
             sh """#!/bin/bash
             curl -s -X POST "${DATABRICKS_HOST_PROD}/api/2.0/workspace/import" \
