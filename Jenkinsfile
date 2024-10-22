@@ -37,7 +37,7 @@ node {
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
                 -H "Content-Type: application/json" \
                 -d '{
-                  "path": "${DEV_DIR}",
+                  "path": "/Workspace",
                   "format": "DBC",
                   "content": "${DB_NOTEBOOK_CONTENT}"
                 }'
