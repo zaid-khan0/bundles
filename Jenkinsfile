@@ -16,13 +16,7 @@ node {
             script {
                 def response = sh(
                     script: """#!/bin/bash
-                    curl -s -X GET "${DATABRICKS_HOST_DEV}/api/2.0/workspace/export" \
-                        -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
-                        -H "Content-Type: application/json" \
-                        -d '{
-                            "path": "${DEV_DIR}",
-                            "format": "DBC"
-                        }' | jq -r '.content'
+                    /home/awsdatabricks00/databricks.sh
                     """,
                     returnStdout: true
                 ).trim()
