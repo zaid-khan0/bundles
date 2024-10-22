@@ -29,6 +29,7 @@ node {
   }
 
     stage('import notebooks to prod') {
+        echo "idhr aaya?, $DB_NOTEBOOK_CONTENT"
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
             // Import the DBC file to the production workspace
             sh """
