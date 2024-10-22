@@ -33,7 +33,7 @@ node {
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
             // Import the DBC file to the production workspace
             sh """#!/bin/bash
-            curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
+            curl -X POST "${DATABRICKS_HOST_PROD}/api/2.0/workspace/import" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
                 -H "Content-Type: application/json" \
                 -d '{
