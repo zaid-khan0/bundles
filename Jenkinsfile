@@ -25,7 +25,7 @@ node {
                 """
                 
                 // Check if the file was exported successfully
-                sh "ls -l ${LOCAL_DBC_FILE}"
+                sh "cat ${LOCAL_DBC_FILE}"
             }
         }
     }
