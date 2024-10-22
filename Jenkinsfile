@@ -13,7 +13,9 @@ node {
     
     stage('export notebooks from dev') {
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-                response =(sh """#!/bin/bash
+            script {
+                def response = sh(
+                    script: """#!/bin/bash
                     curl -s -X GET "${DATABRICKS_HOST_DEV}/api/2.0/workspace/export" \
                         -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
                         -H "Content-Type: application/json" \
@@ -21,14 +23,19 @@ node {
                             "path": "${DEV_DIR}",
                             "format": "DBC"
                         }' | jq -r '.content'
-                    """
-                )
-                echo "$response"
+                    """,
+                    returnStdout: true
+                ).trim()
+                
+                // Storing the response in an environment variable
+                env.EXPORTED_CONTENT = response
+                echo "Exported content from DEV: $env.EXPORTED_CONTENT"
             }
+        }
     }
     
     stage('import notebooks to prod') {
-        echo "$EXPORTED_CONTENT"
+        echo "Using exported content: $env.EXPORTED_CONTENT"
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
             sh """#!/bin/bash
             curl -s -X POST "${DATABRICKS_HOST_PROD}/api/2.0/workspace/import" \
