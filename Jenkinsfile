@@ -32,14 +32,18 @@ node {
         echo "idhr aaya?, $DB_NOTEBOOK_CONTENT"
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN', variable: 'DATABRICKS_TOKEN')]) {
             // Import the DBC file to the production workspace
-            sh """ #!/bin/bash
-            curl -s -X POST "${DATABRICKS_HOST_PROD}/api/2.0/workspace/import" \
+            sh """#!/bin/bash
+            curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN}" \
-                -F "path=${DEV_DIR}" \
-                -F "format=DBC" \
-                -F "content=${DB_NOTEBOOK_CONTENT}" \
-                -F "overwrite=true"
-            """
+                -H "Content-Type: application/json" \
+                -d '{
+                  "path": "${DEV_DIR}",
+                  "format": "DBC",
+                  "content": "${DB_NOTEBOOK_CONTENT}"
+                }'
+
+            
+         """
         }
     }
 }
