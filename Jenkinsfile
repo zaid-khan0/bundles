@@ -13,7 +13,6 @@ node {
     
     stage('export notebooks from dev') {
         withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-            script {
                 response = sh(
                     script: """#!/bin/bash
                     curl -s -X GET "${DATABRICKS_HOST_DEV}/api/2.0/workspace/export" \
@@ -23,13 +22,10 @@ node {
                             "path": "${DEV_DIR}",
                             "format": "DBC"
                         }' | jq -r '.content'
-                    """,
-                    returnStdout: true
-                ).trim()
-                env.EXPORTED_CONTENT = response
+                    """
+                )
                 echo "$response"
             }
-        }
     }
     
     stage('import notebooks to prod') {
