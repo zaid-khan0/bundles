@@ -30,4 +30,3 @@ targets:
   UAT:
     workspace:
         host: https://adb-3242958281839281.1.azuredatabricks.net/
-        path: /Workspace/Shared
