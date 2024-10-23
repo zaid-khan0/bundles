@@ -27,6 +27,5 @@ resources:
 
 
 targets:
-  dev-to-prod:
-    workspace:
-      host: https://adb-3242958281839281.1.azuredatabricks.net/
+  workspace:
+    host: https://adb-3242958281839281.1.azuredatabricks.net/
