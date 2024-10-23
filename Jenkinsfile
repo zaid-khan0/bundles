@@ -20,9 +20,9 @@ node {
       """
     }
 
-    stage('Run Notebook') {
-      sh """#!/bin/bash
-          ${DBCLIPATH}/databricks bundle run -t ${BUNDLETARGET} sample_job
-       """
-  }
+//    stage('Run Notebook') {
+//    sh """#!/bin/bash
+//        ${DBCLIPATH}/databricks bundle run -t sample_job
+//    """
+//  }
 }
