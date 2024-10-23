@@ -27,5 +27,6 @@ resources:
 
 
 targets:
-  workspace:
-    host: https://adb-3242958281839281.1.azuredatabricks.net/
+  UAT:
+    workspace:
+        host: https://adb-3242958281839281.1.azuredatabricks.net/
