@@ -16,7 +16,7 @@ node {
                 -H "Content-Type: application/json" \
                 -d '{
                   "job_id": 129814692029474
-                }
+                }'
         """
     }
   }
