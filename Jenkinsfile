@@ -8,21 +8,16 @@ node {
       git branch: GITBRANCH, url: GITREPOREMOTE
     }
 
-    stage('validate') {
+    stage('export dir') {
+    withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
       sh """#!/bin/bash
-          ${DBCLIPATH}/databricks  bundle validate --profile DEFAULT
-      """
+            $curl -X POST "${DATABRICKS_HOST}/api/2.1/jobs/run-now" \
+                -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "job_id": 129814692029474
+                }
+        """
     }
-
-    stage('deploy'){
-      sh """#!/bin/bash
-          ${DBCLIPATH}/databricks  bundle deploy --profile DEFAULT
-      """
-    }
-
-//    stage('Run Notebook') {
-//    sh """#!/bin/bash
-//        ${DBCLIPATH}/databricks bundle run -t sample_job
-//    """
-//  }
+  }
 }
