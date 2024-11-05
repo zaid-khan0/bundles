@@ -73,7 +73,8 @@ node {
                             -d '{
                               "path": "/Workspace/Users/awsdatabricks00@gmail.com/gggg",
                               "format": "DBC",
-                              "content": "${dir}"
+                              "content": "${dir}",
+                              "overwrite": true
                             }'
                     """)
                 }
