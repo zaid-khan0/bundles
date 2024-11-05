@@ -5,6 +5,7 @@ node {
     def DBCLIPATH     = "/home/linuxbrew/.linuxbrew/bin"
     def BUNDLETARGET  = "dev"
     def result = ""
+    def status = ""
 
     stage('Checkout') {
       git branch: GITBRANCH, url: GITREPOREMOTE
@@ -29,13 +30,14 @@ node {
   stage('testing') {
     echo "Run ID: ${result}"
     withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-      sh """#!/bin/bash
+      status = sh(script: """#!/bin/bash
             curl -X GET "${DATABRICKS_HOST}/api/2.1/jobs/runs/get" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
                 -d '{
                   "run_id": ${result}
-                }'
-        """
+                }' | jq '.status.termination_details.type'
+        """, returnStdout: true).trim()
+        echo "${status}"
     }
   }
   
