@@ -58,7 +58,7 @@ node {
                             -H "Content-Type: application/json" \
                             -d '{
                               "path": "${DEV_DIR}",
-                              "format": "AUTO"
+                              "format": "DBC"
                             }' | jq -r '.content'
                     """, returnStdout: true).trim()
                     echo "Exported content: ${dir}"
@@ -72,7 +72,7 @@ node {
                             -H "Content-Type: application/json" \
                             -d '{
                               "path": "/Workspace/Users/awsdatabricks00@gmail.com/gggg/new/",
-                              "format": "AUTO",
+                              "format": "DBC",
                               "content": "${dir}"
                             }'
                     """)
