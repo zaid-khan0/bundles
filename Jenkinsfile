@@ -23,7 +23,7 @@ node {
       }
     }
   stage('Please let me Sleep 2 minutes more') {
-        steps {   
+        step {   
           sleep(time:2, unit: "MINUTES")
     }
   }
