@@ -43,7 +43,7 @@ node {
     }
   }
   stage('import')
-    if (${status}=="SUCCESS") {{
+    if (${status}=="SUCCESS") {
       withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
       sh """#!/bin/bash
             dir=$(curl -X GET "${DATABRICKS_HOST}/api/2.0/workspace/export" \
@@ -54,9 +54,8 @@ node {
                   "format": "DBC"
                 }'| jq '.content')          
          """
-      }}
-      {
-        withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
+      }
+      withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
       sh """#!/bin/bash
             $curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
@@ -69,7 +68,7 @@ node {
                      
          """
       }
-    }}else {
+    }else {
     error "testing failed"
   }
   
