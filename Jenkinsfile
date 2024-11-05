@@ -49,34 +49,14 @@ node {
         script {
             if (status == "SUCCESS") {
                 echo "Job completed successfully, proceeding with import."
+                sh """#!/bin/bash
+                ${DBCLIPATH}/databricks workspace export_dir --overwrite /Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test/ /home/awsdatabricks00/my-folder
+                   """
+                
+                sh """#!/bin/bash
+                ${DBCLIPATH}/databricks workspace import_dir /home/awsdatabricks00/my-folder /Workspace/Users/awsdatabricks00@gmail.com/gggg
+                   """
 
-                // Export the workspace content
-                withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-                    dir = sh(script: """#!/bin/bash
-                        curl -X GET "${DATABRICKS_HOST}/api/2.0/workspace/export" \
-                            -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
-                            -H "Content-Type: application/json" \
-                            -d '{
-                              "path": "${DEV_DIR}",
-                              "format": "AUTO"
-                            }' | jq -r '.content'
-                    """, returnStdout: true).trim()
-                    echo "Exported content: ${dir}"
-                }
-
-                // Import the workspace content
-                withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-                    sh(script: """#!/bin/bash
-                        curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
-                            -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
-                            -H "Content-Type: application/json" \
-                            -d '{
-                              "path": "/Workspace/Users/awsdatabricks00@gmail.com/gggg/",
-                              "format": "AUTO",
-                              "content": "${dir}"
-                            }'
-                    """)
-                }
             } else {
                 error "Job did not complete successfully; current status: ${status}"
             }
