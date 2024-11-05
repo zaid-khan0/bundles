@@ -58,7 +58,7 @@ node {
                             -H "Content-Type: application/json" \
                             -d '{
                               "path": "${DEV_DIR}",
-                              "format": "DBC"
+                              "format": "AUTO"
                             }' | jq -r '.content'
                     """, returnStdout: true).trim()
                     echo "Exported content: ${dir}"
@@ -71,8 +71,8 @@ node {
                             -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
                             -H "Content-Type: application/json" \
                             -d '{
-                              "path": "/Workspace/Users/awsdatabricks00@gmail.com/gggg/new/",
-                              "format": "DBC",
+                              "path": "/Workspace/Users/awsdatabricks00@gmail.com/gggg/",
+                              "format": "AUTO",
                               "content": "${dir}"
                             }'
                     """)
