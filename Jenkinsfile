@@ -28,6 +28,7 @@ node {
     }
   }
   stage('testing') {
+    echo "${result}"
     withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
       sh """#!/bin/bash
             curl -X GET "${DATABRICKS_HOST}/api/2.1/jobs/runs/get" \
