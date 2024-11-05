@@ -22,4 +22,21 @@ node {
         echo "Run ID: ${result}"
       }
     }
+  stage('Please let me Sleep 2 minutes more') {
+        steps {   
+          sleep(time:2, unit: "MINUTES")
+    }
+  }
+  stage('testing') {
+    withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
+      sh """#!/bin/bash
+            curl -X GET "${DATABRICKS_HOST}/api/2.1/jobs/runs/get" \
+                -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
+                -d '{
+                  "run_id": ${result}
+                }'
+        """
+    }
+  }
+  
 }
