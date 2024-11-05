@@ -11,7 +11,7 @@ node {
 
     stage('testing') {
     withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-      def result = sh """#!/bin/bash
+      result = sh """#!/bin/bash
             curl -X POST "${DATABRICKS_HOST}/api/2.1/jobs/run-now" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
                 -d '{
