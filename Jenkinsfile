@@ -19,7 +19,7 @@ node {
                 }' | jq '.run_id'
         """
         env.result = result
-        echo "$result"
+        echo $result
     }
   }
 
