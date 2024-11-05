@@ -6,6 +6,8 @@ node {
     def BUNDLETARGET  = "dev"
     def result = ""
     def status = ""
+    def dir = ""
+    def DEV_DIR = "/Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test/"
 
     stage('Checkout') {
       git branch: GITBRANCH, url: GITREPOREMOTE
@@ -39,6 +41,36 @@ node {
         """, returnStdout: true).trim()
         echo "${status}"
     }
+  }
+  stage('import')
+    if (${status}=="SUCCESS") {{
+      withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
+      sh """#!/bin/bash
+            dir=$(curl -X GET "${DATABRICKS_HOST}/api/2.0/workspace/export" \
+                -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "path": "${DEV_DIR}",
+                  "format": "DBC"
+                }'| jq '.content')          
+         """
+      }}
+      {
+        withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
+      sh """#!/bin/bash
+            $curl -X POST "${DATABRICKS_HOST}/api/2.0/workspace/import" \
+                -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
+                -H "Content-Type: application/json" \
+                -d '{
+                  "path": "/Workspace/Users/awsdatabricks00@gmail.com/gggg",
+                  "format": "DBC"
+                  "content": "${dir}"
+                }
+                     
+         """
+      }
+    }}else {
+    error "testing failed"
   }
   
 }
