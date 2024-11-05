@@ -24,9 +24,7 @@ node {
       }
     }
   stage('Please let me Sleep 2 minutes more') {
-        step {   
-          sleep(time:2, unit: "MINUTES")
-    }
+        sleep(time:2, unit: "MINUTES")
   }
   stage('testing') {
     echo "Run ID: ${result}"
