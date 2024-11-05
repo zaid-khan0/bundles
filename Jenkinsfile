@@ -50,7 +50,7 @@ node {
             if (status == "SUCCESS") {
                 echo "Job completed successfully, proceeding with import."
                 sh """#!/bin/bash
-                ${DBCLIPATH}/databricks workspace export_dir --overwrite /Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test/ /home/awsdatabricks00/my-folder
+                ${DBCLIPATH}/databricks workspace export_dir /Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test/ /home/awsdatabricks00/my-folder
                    """
                 
                 sh """#!/bin/bash

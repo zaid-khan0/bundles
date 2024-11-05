@@ -2,28 +2,9 @@
 bundle:
   name: kernel
 
-resources:
-  jobs:
-    sample_job:
-      name: sample_job
-      trigger:
-        pause_status: UNPAUSED
-        periodic:
-          interval: 2
-          unit: HOURS
-      tasks:
-        - task_key: task1
-          notebook_task:
-            notebook_path: /Workspace/Users/awsdatabricks00@gmail.com/DABfolder/notebook1
-            source: WORKSPACE
-        - task_key: task2
-          depends_on:
-            - task_key: task1
-          notebook_task:
-            notebook_path: /Workspace/Users/awsdatabricks00@gmail.com/DABfolder/notebook2
-            source: WORKSPACE
-      queue:
-        enabled: true
+artifacts:
+  src:
+    path: /Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test
 
 
 targets:
