@@ -9,18 +9,17 @@ node {
       git branch: GITBRANCH, url: GITREPOREMOTE
     }
 
-    stage('testing') {
-    withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
-      def result = sh """#!/bin/bash
+    stage('Testing') {
+      withCredentials([string(credentialsId: 'DATABRICKS_TOKEN_DEV', variable: 'DATABRICKS_TOKEN_DEV')]) {
+        def result = sh(script: """#!/bin/bash
             curl -X POST "${DATABRICKS_HOST}/api/2.1/jobs/run-now" \
                 -H "Authorization: Bearer ${DATABRICKS_TOKEN_DEV}" \
                 -d '{
                   "job_id": 129814692029474
                 }' | jq '.run_id'
-        """
-        env.result = result
-        echo $result
+        """, returnStdout: true).trim()
+        
+        echo "Run ID: ${result}"
+      }
     }
-  }
-
 }
