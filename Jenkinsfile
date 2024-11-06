@@ -50,11 +50,11 @@ node {
             if (status == "SUCCESS") {
                 echo "Job completed successfully, proceeding with import."
                 sh """#!/bin/bash
-                ${DBCLIPATH}/databricks workspace export-dir /Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test/ /home/awsdatabricks00/dir --profile DEFAULT
+                ${DBCLIPATH}/databricks workspace export-dir /Workspace/Users/awsdatabricks00@gmail.com/ETL_Testing/test/ /home/awsdatabricks00/dir --profile myprofile
                    """
                 
                 sh """#!/bin/bash
-                ${DBCLIPATH}/databricks workspace import-dir /home/awsdatabricks00/dir /Workspace/Users/awsdatabricks00@gmail.com/gggg --profile DEFAULT
+                ${DBCLIPATH}/databricks workspace import-dir /home/awsdatabricks00/dir /Workspace/Users/awsdatabricks00@gmail.com/gggg --profile myprofile
                    """
 
             } else {
